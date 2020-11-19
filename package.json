@@ -1,0 +1,65 @@
+{
+  "name": "westmanga",
+  "version": "0.0.1",
+  "private": true,
+  "scripts": {
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "start": "react-native start",
+    "test": "jest",
+    "lint": "eslint . --ext .js,.jsx,.ts,.tsx"
+  },
+  "dependencies": {
+    "@monedata/react-native-sdk": "^1.0.0",
+    "@react-native-firebase/analytics": "^8.0.1",
+    "@react-native-firebase/app": "^9.0.0",
+    "immer": "^7.0.14",
+    "moment": "^2.29.1",
+    "numeral": "^2.0.6",
+    "react": "16.13.1",
+    "react-native": "0.63.3",
+    "react-native-fast-image": "^8.3.4",
+    "react-native-linear-gradient": "^2.5.6",
+    "react-native-mmkv-storage": "^0.4.2",
+    "react-native-navigation": "^7.3.0",
+    "react-native-purchases": "^3.4.3",
+    "react-native-sqlite-storage": "^5.0.0",
+    "react-native-v8": "^0.63.3-patch.0",
+    "react-native-vector-icons": "^7.1.0",
+    "react-native-version-check": "^3.4.2",
+    "react-native-webview": "^10.10.2",
+    "use-immer": "^0.4.1",
+    "westmanga-extensions": "^0.1.15"
+  },
+  "devDependencies": {
+    "@babel/core": "^7.8.4",
+    "@babel/runtime": "^7.8.4",
+    "@react-native-community/eslint-config": "^1.1.0",
+    "@types/jest": "^25.2.3",
+    "@types/react-native": "^0.63.35",
+    "@types/react-native-sqlite-storage": "^5.0.0",
+    "@types/react-native-vector-icons": "^6.4.6",
+    "@types/react-native-version-check": "^3.4.1",
+    "@types/react-test-renderer": "^16.9.2",
+    "@typescript-eslint/eslint-plugin": "^2.27.0",
+    "@typescript-eslint/parser": "^2.27.0",
+    "babel-jest": "^25.1.0",
+    "babel-plugin-module-resolver": "^4.0.0",
+    "eslint": "^6.5.1",
+    "jest": "^25.1.0",
+    "metro-react-native-babel-preset": "^0.59.0",
+    "react-test-renderer": "16.13.1",
+    "typescript": "^3.8.3"
+  },
+  "jest": {
+    "preset": "react-native",
+    "moduleFileExtensions": [
+      "ts",
+      "tsx",
+      "js",
+      "jsx",
+      "json",
+      "node"
+    ]
+  }
+}
