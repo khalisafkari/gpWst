@@ -6,7 +6,4 @@ export default StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
   },
-  title: {
-    color: 'rgba(255,255,255,.5)',
-  },
 });

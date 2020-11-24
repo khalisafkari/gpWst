@@ -1,20 +1,44 @@
+import {utils} from '@react-native-firebase/app';
 import SQLite from 'react-native-sqlite-storage';
-const dropTable: boolean = false;
-const dropBookmark: string = 'drop table if exists bookmark';
-const bookmark: string = `create table if not exists bookmark  (
-    id text primary key,
-    title text not null,
-    image text not null,
-    create_at timestamp not null default current_timestamp
-);`;
+import query from './query';
+import {AppState, AppStateStatus} from 'react-native';
 
-const buildDatabase = (tx: SQLite.Transaction): void => {
-  if (dropTable) {
-    tx.executeSql(dropBookmark);
+SQLite.DEBUG(false);
+SQLite.enablePromise(true);
+let db: SQLite.SQLiteDatabase | undefined;
+
+const openDB = async () => {
+  if (db) {
+    return db;
   }
-  tx.executeSql(bookmark);
+  const database = await SQLite.openDatabase({
+    location: 'default',
+    name: utils.FilePath.LIBRARY_DIRECTORY + '/westmanga.db',
+  });
+  await query(database);
+  db = database;
+  return database;
 };
 
-export default async (db: SQLite.SQLiteDatabase): Promise<void> => {
-  return await db.transaction(buildDatabase).then(() => {});
+const closeDatabase = () => {
+  db?.close();
+  db = undefined;
+};
+
+let appState: AppStateStatus = 'active';
+const App = (state: AppStateStatus) => {
+  if (appState === 'active' && state.match(/inactive|background/)) {
+    closeDatabase();
+  }
+  appState = state;
+};
+
+AppState.addEventListener('change', App);
+AppState.removeEventListener('change', App);
+
+export default () => {
+  if (db !== undefined) {
+    return Promise.resolve(db);
+  }
+  return openDB();
 };

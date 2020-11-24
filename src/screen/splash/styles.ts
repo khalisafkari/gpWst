@@ -4,7 +4,7 @@ export default StyleSheet.create({
   container: {
     flex: 1,
   },
-  logo: {
+  logoContainer: {
     justifyContent: 'center',
     alignItems: 'center',
     flex: 1,

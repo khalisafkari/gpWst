@@ -11,9 +11,11 @@
   },
   "dependencies": {
     "@monedata/react-native-sdk": "^1.0.0",
+    "@react-native-community/google-signin": "^5.0.0",
     "@react-native-firebase/analytics": "^8.0.1",
     "@react-native-firebase/app": "^9.0.0",
-    "immer": "^7.0.14",
+    "@react-native-firebase/auth": "^10.0.0",
+    "@react-native-firebase/storage": "^10.0.0",
     "moment": "^2.29.1",
     "numeral": "^2.0.6",
     "react": "16.13.1",
@@ -21,14 +23,13 @@
     "react-native-fast-image": "^8.3.4",
     "react-native-linear-gradient": "^2.5.6",
     "react-native-mmkv-storage": "^0.4.2",
-    "react-native-navigation": "^7.3.0",
+    "react-native-navigation": "^7.4.0",
     "react-native-purchases": "^3.4.3",
     "react-native-sqlite-storage": "^5.0.0",
     "react-native-v8": "^0.63.3-patch.0",
     "react-native-vector-icons": "^7.1.0",
     "react-native-version-check": "^3.4.2",
     "react-native-webview": "^10.10.2",
-    "use-immer": "^0.4.1",
     "westmanga-extensions": "^0.1.15"
   },
   "devDependencies": {

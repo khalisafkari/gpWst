@@ -1,98 +1,113 @@
-import SQLite from 'react-native-sqlite-storage';
-import {AppState, AppStateStatus} from 'react-native';
-import config from '@utils/database/sqlite/config';
-import paginations from '@utils/database/pagination';
-let db: SQLite.SQLiteDatabase | undefined;
+import db from './config';
+// eslint-disable-next-line @typescript-eslint/no-unused-vars
+import {init, queryInit, checkIf, isInsert, isAll} from './query';
+import {useCallback, useEffect, useRef, useState} from 'react';
 
-let appState: AppStateStatus = 'active';
+interface useFindBookmark {
+  id: string;
+  title: string | undefined;
+  image: string | undefined;
+}
 
-const sql = {
-  getId: async function (id: string) {
+export interface allItem extends useFindBookmark {
+  create_at: any;
+}
+
+const database = {
+  // eslint-disable-next-line no-shadow
+  getId: async function (init: init, id: string) {
     try {
-      const [connection] = await getDB().then((db) =>
-        db.executeSql('select * from bookmark where id = ?', [id]),
-      );
-      return connection.rows.item(connection.rows.length - 1);
-    } catch (e) {
-      return Promise.reject(e);
+      const [item] = await db().then((sql) => {
+        return sql.executeSql(checkIf(init), [id]);
+      });
+      return item.rows.length > 0;
+    } catch (error) {
+      throw new Error(error);
     }
   },
-  setId: async function (id: string, title: string, image: string) {
-    try {
-      const [connection] = await getDB().then((db) =>
-        db.executeSql('insert into bookmark (id,title,image) values (?,?,?)', [
+  // eslint-disable-next-line no-shadow
+  push: function (init: init = 'history', query: queryInit) {
+    this.getId(init, query.id).then(async (results) => {
+      if (!results) {
+        try {
+          const [item] = await db().then((sql) => {
+            return sql.executeSql(isInsert(init), [
+              query.id,
+              query.title,
+              query.image,
+            ]);
+          });
+          return item.insertId > 0;
+        } catch (err) {
+          throw new Error(err);
+        }
+      }
+    });
+  },
+  // eslint-disable-next-line no-shadow
+  del: function (init: init, id: string) {
+    this.getId(init, id).then(async (results) => {
+      if (results) {
+        try {
+          await db().then((sql) => {
+            return sql.executeSql('delete from bookmark where id = ?', [id]);
+          });
+          return false;
+        } catch (err) {
+          throw new Error(err);
+        }
+      }
+    });
+  },
+  useFindBookmark: function ({id, title, image}: useFindBookmark) {
+    const isMounted = useRef(true);
+    const [state, setState] = useState<boolean>(false);
+    useEffect(() => {
+      return () => {
+        isMounted.current = false;
+      };
+    });
+    const onFetch = useCallback(() => {
+      this.getId('bookmark', id).then((results) => {
+        if (isMounted.current) {
+          setState(results);
+        }
+      });
+    }, [id]);
+    useEffect(onFetch, []);
+
+    const addBookmark = useCallback(() => {
+      if (state) {
+        this.del('bookmark', id);
+        setState(false);
+      } else {
+        this.push('bookmark', {
           id,
           title,
           image,
-        ]),
-      );
-      return connection;
-    } catch (e) {
-      return Promise.reject(e);
-    }
-  },
-  delId: async function (id: string) {
-    try {
-      const [connection] = await getDB().then((db) =>
-        db.executeSql('delete from bookmark WHERE id = ?', [id]),
-      );
-      return connection;
-    } catch (e) {
-      return Promise.reject(e);
-    }
-  },
-  all: async function (page?: number | any) {
-    try {
-      const [connection] = await getDB().then((db) =>
-        db.executeSql('SELECT * FROM bookmark ORDER BY create_at DESC'),
-      );
-      const todos = [];
-      for (let i = 0; i < connection.rows.length; i++) {
-        todos.push(connection.rows.item(i));
+        });
+        setState(true);
       }
-      const p: number = page > 1 ? page : 1;
-      return paginations(todos, p, 10);
-    } catch (e) {
-      return Promise.reject(e);
+      this.del('bookmark', id);
+    }, [id, image, state, title]);
+
+    return {state, addBookmark};
+  },
+  // eslint-disable-next-line no-shadow
+  getAll: async function (init: init) {
+    try {
+      const todos: allItem[] = [];
+      const [item] = await db().then((sql) => {
+        return sql.executeSql(isAll(init));
+      });
+      for (let i = 0; i < item.rows.length; i++) {
+        todos.push(item.rows.item(i));
+      }
+      return todos;
+    } catch (err) {
+      throw new Error(err);
     }
   },
 };
 
-const getDB = async function () {
-  if (db !== undefined) {
-    return Promise.resolve(db);
-  }
-  return openDB();
-};
-
-const openDB = async function (): Promise<SQLite.SQLiteDatabase> {
-  SQLite.DEBUG(false);
-  SQLite.enablePromise(true);
-  if (db) {
-    return db;
-  }
-  const database = await SQLite.openDatabase({
-    name: 'loveheaven.sqlite',
-    location: 'default',
-  });
-  await config(database);
-  db = database;
-  return database;
-};
-
-const closeUI = () => {
-  if (db === undefined) {
-    return;
-  }
-  db.close();
-  db = undefined;
-};
-const updateUI = (state: AppStateStatus) => {
-  if (appState == 'active' && state.match(/inactive|background/)) {
-    closeUI();
-  }
-  appState = state;
-};
-
-AppState.addEventListener('change', updateUI);
-export default sql;
+export default database;
