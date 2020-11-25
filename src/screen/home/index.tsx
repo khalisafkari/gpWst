@@ -2,9 +2,9 @@ import React, {useCallback} from 'react';
 import {SectionList, View} from 'react-native';
 import {useHome} from 'utils/hook';
 import styles from './styles';
-import Slide from 'component/slide';
-import Loading from 'component/loading';
-import ListItem from 'component/listItem';
+import Slide from '@component/slide';
+import Loading from '@component/loading';
+import ListItem from '@component/listItem';
 
 interface props {
   componentId: string;

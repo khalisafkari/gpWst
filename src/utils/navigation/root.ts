@@ -7,6 +7,8 @@ import {
 import analytics from '@react-native-firebase/analytics';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Purchases from 'react-native-purchases';
+// @ts-ignore
+import AppLovinMAX from 'react-native-applovin-max';
 import {useCallback, useEffect} from 'react';
 
 export default {
@@ -200,6 +202,14 @@ export default {
   iapRegistery: function () {
     Purchases.setDebugLogsEnabled(__DEV__);
     Purchases.setup('HEUlXdbXAIzCriOnmwtSgMQFWPCwmJcF');
+  },
+  adsInitialize: function () {
+    AppLovinMAX.initialize(
+      'ioiA26xeiE7sp2y_ooxmzkBikQXzCG2GIIv3T2VKprroz_-gccPp6TZXuZbivFqOP2a3n02TC9W5yDJK3O4QGm',
+      (config: any) => {
+        console.log(config);
+      },
+    );
   },
   getPurchase: function () {},
 };

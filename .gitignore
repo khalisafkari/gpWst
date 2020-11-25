@@ -27,6 +27,7 @@ build/
 .idea
 .gradle
 local.properties
+.safedk
 *.iml
 
 # Visual Studio Code
