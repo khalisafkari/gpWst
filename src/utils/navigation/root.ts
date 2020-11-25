@@ -198,7 +198,7 @@ export default {
     useEffect(onCall, []);
   },
   iapRegistery: function () {
-    Purchases.setDebugLogsEnabled(false);
+    Purchases.setDebugLogsEnabled(__DEV__);
     Purchases.setup('HEUlXdbXAIzCriOnmwtSgMQFWPCwmJcF');
   },
   getPurchase: function () {},

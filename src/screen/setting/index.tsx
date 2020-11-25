@@ -11,6 +11,12 @@ const Setting: React.FC<props> = (props) => {
   return (
     <View style={styles.container}>
       <MenuSettingItem
+        id={'account'}
+        componentId={props.componentId}
+        title={'Account'}
+        icon={'user'}
+      />
+      <MenuSettingItem
         id={'history'}
         componentId={props.componentId}
         title={'history'}

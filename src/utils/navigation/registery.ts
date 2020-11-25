@@ -12,6 +12,8 @@ import Reader from '@screen/reader';
 import Advanced from '@screen/advanced';
 import Search from '@screen/search';
 import History from '@screen/history';
+import Account from '@screen/account';
+import Buy from '@screen/Buy';
 import HomePixabay from 'pixabay/home';
 import PostsPixabay from 'pixabay/posts';
 
@@ -27,6 +29,8 @@ Navigation.registerComponent('com.bk2020.detail', () => Detail);
 Navigation.registerComponent('com.bk2020.reader', () => Reader);
 
 Navigation.registerComponent('com.bk2020.setting', () => Setting);
+Navigation.registerComponent('com.bk2020.account', () => Account);
+Navigation.registerComponent('com.bk2020.buy', () => Buy);
 Navigation.registerComponent('com.bk2020.history', () => History);
 Navigation.registerComponent('com.bk2020.faq', () => Faq);
 Navigation.registerComponent('com.bk2020.privacy', () => PrivacyPolicy);
