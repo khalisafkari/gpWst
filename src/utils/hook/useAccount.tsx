@@ -1,8 +1,11 @@
 import {useCallback, useEffect, useRef, useState} from 'react';
 import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
-import {GoogleSignin} from '@react-native-community/google-signin';
+import {GoogleSignin, statusCodes} from '@react-native-community/google-signin';
+import {Alert, ToastAndroid} from 'react-native';
 
 GoogleSignin.configure({
+  scopes: ['https://www.googleapis.com/auth/drive.readonly'],
+  offlineAccess: true,
   webClientId:
     '962368346883-n15r43fojc0sob0ngtks8mjpdc9uk9m0.apps.googleusercontent.com',
 });
@@ -36,13 +39,28 @@ const useAccount = () => {
   const gLogin = useCallback(() => {
     (async () => {
       try {
-        await GoogleSignin.hasPlayServices();
-        const {idToken} = await GoogleSignin.signIn();
-        const credentitial = auth.GoogleAuthProvider.credential(idToken);
-        await auth().signInWithCredential(credentitial);
-        onChange();
+        await GoogleSignin.hasPlayServices({
+          showPlayServicesUpdateDialog: true,
+        });
+        await GoogleSignin.signIn();
+        const {accessToken, idToken} = await GoogleSignin.getTokens();
+        const google = await auth().signInWithCredential(
+          auth.GoogleAuthProvider.credential(idToken, accessToken),
+        );
+        if (typeof google !== 'undefined') {
+          onChange();
+        }
+        ToastAndroid.show('success', ToastAndroid.LONG);
       } catch (error) {
-        console.log(error);
+        if (error.code === statusCodes.SIGN_IN_CANCELLED) {
+          Alert.alert('Error', 'SIGN_IN_CANCELLED');
+        } else if (error.code === statusCodes.IN_PROGRESS) {
+          Alert.alert('Error', 'IN_PROGRESS');
+        } else if (error.code === statusCodes.PLAY_SERVICES_NOT_AVAILABLE) {
+          Alert.alert('Error', 'PLAY_SERVICES_NOT_AVAILABLE');
+        } else {
+          Alert.alert('Error', 'Contact Developer');
+        }
       }
     })();
   }, [onChange]);
