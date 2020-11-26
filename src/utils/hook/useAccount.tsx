@@ -60,6 +60,7 @@ const useAccount = () => {
           Alert.alert('Error', 'PLAY_SERVICES_NOT_AVAILABLE');
         } else {
           Alert.alert('Error', 'Contact Developer');
+          console.log(JSON.stringify(error));
         }
       }
     })();
