@@ -16,6 +16,9 @@ import Account from '@screen/account';
 import Buy from '@screen/Buy';
 import HomePixabay from 'pixabay/home';
 import PostsPixabay from 'pixabay/posts';
+import BookmarkPixabay from 'pixabay/bookmark';
+import IapPixabay from 'pixabay/iap';
+import SettingPixabay from 'pixabay/setting';
 
 Navigation.registerComponent('com.bk2020.splash', () => Splash);
 Navigation.registerComponent('com.bk2020.home', () => Home);
@@ -37,3 +40,12 @@ Navigation.registerComponent('com.bk2020.privacy', () => PrivacyPolicy);
 
 Navigation.registerComponent('com.bk2020.homepixabay', () => HomePixabay);
 Navigation.registerComponent('com.bk2020.pixabay.posts', () => PostsPixabay);
+Navigation.registerComponent(
+  'com.bk2020.pixabay.bookmark',
+  () => BookmarkPixabay,
+);
+Navigation.registerComponent(
+  'com.bk2020.pixabay.setting',
+  () => SettingPixabay,
+);
+Navigation.registerComponent('com.bk2020.pixabay.iap', () => IapPixabay);

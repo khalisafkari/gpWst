@@ -95,9 +95,34 @@ export default {
   pixabay: function () {
     Navigation.setRoot({
       root: {
-        ...this.stack({
-          name: 'homepixabay',
-        }),
+        bottomTabs: {
+          children: [
+            this.stack({
+              name: 'homepixabay',
+              options: {
+                bottomTab: {
+                  icon: Icon.getImageSourceSync('home', 25),
+                },
+              },
+            }),
+            this.stack({
+              name: 'pixabay.bookmark',
+              options: {
+                bottomTab: {
+                  icon: Icon.getImageSourceSync('book', 25),
+                },
+              },
+            }),
+            this.stack({
+              name: 'pixabay.setting',
+              options: {
+                bottomTab: {
+                  icon: Icon.getImageSourceSync('setting', 25),
+                },
+              },
+            }),
+          ],
+        },
       },
     });
   },

@@ -35,6 +35,9 @@ const HomePixabay = (props: any) => {
                   topBar: {
                     visible: false,
                   },
+                  bottomTabs: {
+                    visible: false,
+                  },
                   animations: {
                     push: {
                       sharedElementTransitions: [
