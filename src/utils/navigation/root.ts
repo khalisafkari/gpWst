@@ -160,21 +160,6 @@ export default {
       },
     });
   },
-  useDetail: function (componentId: string, layout: LayoutComponent) {
-    const onCall = useCallback(() => {
-      const subscriber = Navigation.events().registerNavigationButtonPressedListener(
-        ({buttonId}) => {
-          if (buttonId === 'info-content') {
-            this.push(componentId, layout);
-          }
-        },
-      );
-      return () => {
-        subscriber.remove();
-      };
-    }, [componentId, layout]);
-    useEffect(onCall, []);
-  },
   useSearch: function (componentId: string) {
     const onCall = useCallback(() => {
       const subscriptions = Navigation.events().registerNavigationButtonPressedListener(
@@ -231,9 +216,7 @@ export default {
   adsInitialize: function () {
     AppLovinMAX.initialize(
       'ioiA26xeiE7sp2y_ooxmzkBikQXzCG2GIIv3T2VKprroz_-gccPp6TZXuZbivFqOP2a3n02TC9W5yDJK3O4QGm',
-      (config: any) => {
-        console.log(config);
-      },
+      () => {},
     );
   },
   getPurchase: function () {},

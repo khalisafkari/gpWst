@@ -7,7 +7,7 @@ import PrivacyPolicy from '@screen/privacy';
 import List from '@screen/list';
 import Bookmark from '@screen/bookmark';
 import Post from '@screen/post';
-import Detail from '@screen/detail';
+import FullImage from '@screen/fullImage';
 import Reader from '@screen/reader';
 import Advanced from '@screen/advanced';
 import Search from '@screen/search';
@@ -28,7 +28,7 @@ Navigation.registerComponent('com.bk2020.search', () => Search);
 Navigation.registerComponent('com.bk2020.bookmark', () => Bookmark);
 
 Navigation.registerComponent('com.bk2020.post', () => Post);
-Navigation.registerComponent('com.bk2020.detail', () => Detail);
+Navigation.registerComponent('com.bk2020.fullimage', () => FullImage);
 Navigation.registerComponent('com.bk2020.reader', () => Reader);
 
 Navigation.registerComponent('com.bk2020.setting', () => Setting);

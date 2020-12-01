@@ -42,7 +42,7 @@ export default {
   },
   callAd: function () {
     if (listener !== undefined) {
-      listener.loadInterstitial('70d414d580dc0549');
+      listener.loadInterstitial('e176394e75eb1b15');
     }
   },
   showInterstitial: function () {
@@ -53,8 +53,8 @@ export default {
         }
       } else {
         if (listener !== undefined) {
-          if (listener.isInterstitialReady('70d414d580dc0549')) {
-            listener.showInterstitial('70d414d580dc0549');
+          if (listener.isInterstitialReady('e176394e75eb1b15')) {
+            listener.showInterstitial('e176394e75eb1b15');
           }
           this.removeEventListener();
         }

@@ -36,12 +36,6 @@ const SlideItem: React.FC<props> = (props) => {
             title: {
               text: props.item.boxinfo.tt,
             },
-            rightButtons: [
-              {
-                id: 'info-content',
-                icon: Icon.getImageSourceSync('infocirlceo', 20),
-              },
-            ],
           },
           bottomTabs: {
             visible: false,

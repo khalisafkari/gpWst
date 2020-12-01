@@ -1,4 +1,4 @@
-package com.bk2020;
+package com.issekai.manga;
 
 import android.app.Application;
 import android.content.Context;

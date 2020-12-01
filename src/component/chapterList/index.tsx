@@ -1,12 +1,12 @@
 import React, {useCallback} from 'react';
 import {getPosts} from 'westmanga-extensions';
-import {ScrollView, View} from 'react-native';
+import {View} from 'react-native';
 import styles from './styles';
 import ChapterItem from 'component/chapterItem';
 
 interface props {
   componentId: string;
-  item: getPosts;
+  item: getPosts | any;
 }
 
 const ChapterList: React.FC<props> = (props) => {
@@ -25,9 +25,7 @@ const ChapterList: React.FC<props> = (props) => {
   );
 
   return (
-    <View style={styles.container}>
-      <ScrollView>{props.item.list.map(onRenderItem)}</ScrollView>
-    </View>
+    <View style={styles.container}>{props.item.list.map(onRenderItem)}</View>
   );
 };
 

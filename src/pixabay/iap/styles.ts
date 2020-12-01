@@ -67,11 +67,18 @@ export default StyleSheet.create({
   subscriptionDescription: {
     color: '#d7c9d7',
     textAlign: 'center',
-    fontSize: 11.5,
+    fontSize: 12,
     textTransform: 'capitalize',
-    fontWeight: 'bold',
+    // fontWeight: 'bold',
   },
   subscriptionPolicy: {
     color: 'blue',
+  },
+  cancel: {
+    color: '#fff',
+    fontSize: 15,
+    textTransform: 'uppercase',
+    textAlign: 'center',
+    fontWeight: 'bold',
   },
 });

@@ -4,9 +4,7 @@ const width = Dimensions.get('window').width * 0.3;
 
 export default StyleSheet.create({
   container: {
-    flexDirection: 'row',
-    flexWrap: 'wrap',
-    margin: 10,
+    paddingHorizontal: 10,
   },
   item: {
     height: 25,

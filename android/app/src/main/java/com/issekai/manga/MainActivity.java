@@ -1,4 +1,4 @@
-package com.bk2020;
+package com.issekai.manga;
 
 import com.reactnativenavigation.NavigationActivity;
 

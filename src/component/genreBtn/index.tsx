@@ -1,5 +1,5 @@
 import React, {useCallback} from 'react';
-import {Text, View} from 'react-native';
+import {ScrollView, Text, View} from 'react-native';
 import styles from './styles';
 
 interface props {
@@ -21,9 +21,12 @@ const GenreBtn: React.FC<props> = (props) => {
   }, []);
 
   return (
-    <View style={styles.container}>
+    <ScrollView
+      contentContainerStyle={styles.container}
+      showsHorizontalScrollIndicator={false}
+      horizontal={true}>
       {props.genre ? props.genre.map(genreItem) : null}
-    </View>
+    </ScrollView>
   );
 };
 

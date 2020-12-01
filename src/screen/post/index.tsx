@@ -1,11 +1,11 @@
 import React, {useCallback, useEffect} from 'react';
-import {View} from 'react-native';
+import {View, ScrollView} from 'react-native';
 import {sqlite} from '@utils/database';
-import root from 'utils/navigation/root';
 import {usePosts} from '@utils/hook';
 import Loading from 'component/loading';
 import styles from './styles';
 import ChapterList from 'component/chapterList';
+import DetailContainer from 'component/detailContainer';
 
 interface props {
   id: string;
@@ -25,29 +25,19 @@ const Post: React.FC<props> = (props) => {
   }, [props.id, props.image, props.title]);
   useEffect(onHistroyAdd, []);
 
-  root.useDetail(props.componentId, {
-    name: 'detail',
-    passProps: {
-      id: props.id,
-      title: props.title,
-      image: props.image,
-    },
-    options: {
-      topBar: {
-        title: {
-          text: props.title,
-        },
-      },
-      bottomTabs: {
-        visible: false,
-      },
-    },
-  });
-
   return (
     <View style={styles.container}>
       {value ? (
-        <ChapterList componentId={props.componentId} item={value} />
+        <ScrollView showsVerticalScrollIndicator={false}>
+          <DetailContainer
+            data={value}
+            id={props.id}
+            title={props.title}
+            image={props.image}
+            componentId={props.componentId}
+          />
+          <ChapterList componentId={props.componentId} item={value} />
+        </ScrollView>
       ) : (
         <Loading />
       )}

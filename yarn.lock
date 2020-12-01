@@ -980,11 +980,6 @@
     "@types/yargs" "^15.0.0"
     chalk "^3.0.0"
 
-"@monedata/react-native-sdk@^1.0.0":
-  version "1.1.0"
-  resolved "https://registry.yarnpkg.com/@monedata/react-native-sdk/-/react-native-sdk-1.1.0.tgz#0495131e723c2cb06c8d3f1cfebfb1cc13434626"
-  integrity sha512-/mCQdTYcbSheVHaUcSfhB2vHc0opcHQIuM/wN9mTfZlLG9cIiiLq26VIUlTLdFKn82PXOAkNXWuPm5sJqeKOVw==
-
 "@react-native-community/cli-debugger-ui@^4.13.1":
   version "4.13.1"
   resolved "https://registry.yarnpkg.com/@react-native-community/cli-debugger-ui/-/cli-debugger-ui-4.13.1.tgz#07de6d4dab80ec49231de1f1fbf658b4ad39b32c"
@@ -1269,6 +1264,13 @@
   version "15.7.3"
   resolved "https://registry.yarnpkg.com/@types/prop-types/-/prop-types-15.7.3.tgz#2ab0d5da2e5815f94b0b9d4b95d1e5f243ab2ca7"
   integrity sha512-KfRL3PuHmqQLOG+2tGpRO26Ctg+Cq1E01D2DMriKEATHgWLfeNDmq9e29Q9WIky0dQ3NPkd1mzYH8Lm936Z9qw==
+
+"@types/react-native-read-more-text@^1.0.0":
+  version "1.0.0"
+  resolved "https://registry.yarnpkg.com/@types/react-native-read-more-text/-/react-native-read-more-text-1.0.0.tgz#2d447ba239fe510e8724ef77e8c707949593f693"
+  integrity sha512-Vs9zYLgle5+Tuhr/Em45nms5lWr/jpEs5m50UT1SamlqRyTTBLcvqVk2i1WShe/+sl/Jf1NpWt9KHEexVEDefA==
+  dependencies:
+    "@types/react" "*"
 
 "@types/react-native-sqlite-storage@^5.0.0":
   version "5.0.0"
@@ -5809,6 +5811,11 @@ react-native-purchases@^3.4.3:
   version "3.4.3"
   resolved "https://registry.yarnpkg.com/react-native-purchases/-/react-native-purchases-3.4.3.tgz#f263fddb47d00a53fd6e317781d086634dcdbd09"
   integrity sha512-wbK1CcMDX2iW66LMBh5yE7gMViAxCswTH+clWQXg5rm5zZBCAOX0pf+NE7nB0XMIgIyeeO5U0j1Gjtotkkv4MQ==
+
+react-native-read-more-text@^1.1.2:
+  version "1.1.2"
+  resolved "https://registry.yarnpkg.com/react-native-read-more-text/-/react-native-read-more-text-1.1.2.tgz#3f64aee61ec4d3109437f4125f10e49eccdee65a"
+  integrity sha512-FIQhOpvikUanwPRl9QVBYmx6Wx7IXxXH/jlzElOLcP+NSgFLw2fRzSekQUq0yicymZsi7cAWW5TtIj8FHWtNDw==
 
 react-native-sqlite-storage@^5.0.0:
   version "5.0.0"

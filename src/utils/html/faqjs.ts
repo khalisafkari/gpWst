@@ -6,6 +6,7 @@ export default () => {
 <style>
 body {
     margin: 0;
+    background-color: #262b36;
 }
 .collapsible {
   background-color: #262b36;
@@ -39,78 +40,74 @@ body {
 </style>
 </head>
 <body>
-<button type="button" class="collapsible">Should i register an account</button>
+<button type="button" class="collapsible">1.1 Apakah anda perlu mendaftar</button>
 <div class="content">
   <p>
-  No, but you need to register if you subscribe to the pro feature, to enjoy the backup feature
+       Tidak, untuk saat ini kami tidak berencana membuka layanan login / register
   </p>
 </div>
 
-<button type="button" class="collapsible">Why is only available login with google</button>
+<button type="button" class="collapsible">1.2 Bisakah saya melakukan bookmark</button>
+<div class="content">
+  <p> 
+    Bisa, Namun terkadang bookmark di kunci mungkin anda harus berlangganan untuk membuka fiture ini.
+    Kami tidak melarang anda melakukan bookmark, 
+    silahkan anda lakukan bookmark dengan cara pilih item dan klik save atau icon book,
+   </p>
+</div>
+
+<button type="button" class="collapsible">1.3 Apakah layanan ini gratis</button>
 <div class="content">
   <p>
-  Why do you have to log in via a password if it's easier with Google, isn't Android being prioritized by Google,
+    Ya, layanan ini gratis dan kami mengikuti ketentuan berdasarkan licensi public / commercial use yang kami gunakan,
+    Namun untuk berbayar itu adalah fiture dari aplikasi bukan dari kami menjual product dari licensi public yang kami gunakan
   </p>
 </div>
 
-<button type="button" class="collapsible">Why not link bookmarks with the web</button>
+<button type="button" class="collapsible">1.4 Bagaimana cara berlangganan</button>
 <div class="content">
   <p>
-because we rely on this feature in the application, for application server maintenance costs
+    Silahkan pilih menu buy / beli / langganan jika tersedia, setiap langganan akan automaticaly di perpanjang.
+    Namun anda bisa membatalkannya kapan saja.
   </p>
 </div>
 
-<button type="button" class="collapsible">What's free</button>
+
+<button type="button" class="collapsible">1.5 Bagaimana berhenti berlangganan</button>
 <div class="content">
   <p>
-  You can access all the features in the application, but some features are not connected to the cloud server, such as bookmarks, history, which will not be returned if you delete the application or we upgrade the application.
-  </p>
-</div>
-<button type="button" class="collapsible">What's pro</button>
-<div class="content">
-  <p>You can access all the features in the application without ads, and you get access to the cloud backup feature where bookmark data, history will be stored on the server, can be restored as long as you have made a backup, cloud features can only be accessed as long as your subscription is active.
+    Anda bisa melakukannya melalui playstore anda, dan setelah anda berhenti 
+    tidak ada lagi langganan yang akan berjalan
   </p>
 </div>
 
-<button type="button" class="collapsible">How to subscribe</button>
+
+<button type="button" class="collapsible">1.6 Bisakah langganan saya di gunakan di beberapa device</button>
 <div class="content">
-  <p>you have to log in first</p>
+  <p>
+    Perlu di jelaskan kami tidak menyimpan pembelian user di server kami, melainkan semua menggunakan api iap-billing dari google
+    Dan setiap pemanggilan menu kami menggukan getInfoPurchase untuk mendeteksi status langganan,
+    Namun jika untuk langganan mungkin bisa di gunakan di device lain yang menggukana akun google yang sama.
+    Namun kami tidak yakin, untuk lebih jelasnya silahkan hubungi contact payment google
+  </p>
 </div>
 
-<button type="button" class="collapsible">How much does it cost to subscribe</button>
+<button type="button" class="collapsible">1.7 Adakah iklan di layanan ini</button>
 <div class="content">
-  <p>you can see the price on the subscription menu</p>
+  <p>
+      Ada namun jarang, kami tidak suka iklan, jadi kami membatasi ruang lingkup iklan, 
+      mungkin sekali dalam 30 menit / tidak ada sama sekali.
+  </p>
 </div>
 
-
-<button type="button" class="collapsible">Can i cancel the subscription</button>
+<button type="button" class="collapsible">1.8 Bisakah saya menghubungi anda</button>
 <div class="content">
-  <p>open the google play store application and select the manage subscriptions menu and stop subscription</p>
+  <p>
+    Dipersilahkan, namun kami akan melihat satu persatu email yang masuk dan kami membalas jika memang itu di perlukan,
+    kontak tersedia pada playstore.
+  </p>
 </div>
 
-
-<button type="button" class="collapsible">Can my subscription be used on other devices</button>
-<div class="content">
-  <p>it is your freedom but if something suspicious happens we will terminate your account</p>
-</div>
-
-
-<button type="button" class="collapsible">My account was deleted / locked, can I restore it</button>
-<div class="content">
-  <p>please contact our support, but there is no guarantee that your account will be returned</p>
-</div>
-
-<button type="button" class="collapsible">How to contact us</button>
-<div class="content">
-  <p>please look at the website, never contact the contact on the playstore because we do not guarantee an answer</p>
-</div>
-
-<button type="button" class="collapsible">I subscribed to pro features but my bookmarks are missing</button>
-<div class="content">
- <p>
-    If you have done a backup before, your data will come back when you restore
-    </p>
-</div>
 <script>
 var coll = document.getElementsByClassName("collapsible");
 var i;

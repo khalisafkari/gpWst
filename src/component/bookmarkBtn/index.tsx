@@ -8,10 +8,15 @@ interface props {
   id: string;
   title: string;
   image: string;
+  author: string;
 }
 
 const BookmarkBtn: React.FC<props> = (props) => {
-  const {state, addBookmark} = sqlite.useFindBookmark(props);
+  const {state, addBookmark} = sqlite.useFindBookmark({
+    id: props.id,
+    title: props.title,
+    image: props.image,
+  });
 
   const onPress = useCallback(() => {
     addBookmark();
@@ -22,6 +27,9 @@ const BookmarkBtn: React.FC<props> = (props) => {
       <View style={styles.titleContainer}>
         <Text numberOfLines={2} style={styles.title}>
           {props.title}
+        </Text>
+        <Text numberOfLines={1} style={styles.author}>
+          {props.author}
         </Text>
       </View>
       <Pressable onPress={onPress} style={styles.btn}>

@@ -15,6 +15,7 @@ const Splash: React.FC<props> = () => {
   const [latestVersion, setLatestVersion] = useState<string>(
     versions.getCurrentVersion(),
   );
+  const [nanti, setNanti] = useState<boolean>(false);
   const isMounted = useRef<boolean>(true);
 
   useEffect(() => {
@@ -37,16 +38,21 @@ const Splash: React.FC<props> = () => {
   }, []);
 
   const onVersions = useCallback(() => {
-    versions.needUpdate().then((results) => {
-      if (isMounted.current) {
-        if (results.isNeeded) {
-          setIsNeeded(results.isNeeded);
-          setLatestVersion(results.latestVersion);
-        } else {
-          onFetchCountry();
+    versions
+      .needUpdate()
+      .then((results) => {
+        if (isMounted.current) {
+          if (results.isNeeded) {
+            setIsNeeded(results.isNeeded);
+            setLatestVersion(results.latestVersion);
+          } else {
+            onFetchCountry();
+          }
         }
-      }
-    });
+      })
+      .catch(() => {
+        setNanti(true);
+      });
   }, [onFetchCountry]);
 
   useEffect(onVersions, []);
@@ -67,16 +73,18 @@ const Splash: React.FC<props> = () => {
         <Image source={require('../../assets/icon.png')} style={styles.image} />
       </View>
       {isNeeded ? (
-        <Pressable
-          onLongPress={onFetchCountry}
-          onPress={onUpdate}
-          style={[styles.update]}>
+        <Pressable onPress={onUpdate} style={[styles.update]}>
           <Text style={styles.version}>update now</Text>
           <Text style={styles.desain}>
             version {versions.getCurrentVersion()}
             {' > '}
             {latestVersion}
           </Text>
+        </Pressable>
+      ) : null}
+      {nanti ? (
+        <Pressable onPress={onFetchCountry} style={[styles.update]}>
+          <Text style={styles.version}>NANTI</Text>
         </Pressable>
       ) : null}
       <Pressable onPress={onFacebok}>

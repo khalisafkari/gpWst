@@ -138,6 +138,7 @@ const IapPixabay: React.FC<props> = (props) => {
         />
       </View>
       <View style={styles.footer}>
+        <Text style={styles.cancel}>Cancel Anytime</Text>
         <Text style={styles.subscriptionDescription}>
           this subscription give you unlimited access & backup to our app
           content library. Your subscription will renew for the same plan lenght
