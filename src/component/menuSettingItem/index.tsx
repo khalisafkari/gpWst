@@ -1,5 +1,5 @@
 import React, {useCallback} from 'react';
-import {Pressable, Text, View} from 'react-native';
+import {GestureResponderEvent, Pressable, Text, View} from 'react-native';
 import Icon from 'react-native-vector-icons/AntDesign';
 import styles from './styles';
 import root from 'utils/navigation/root';
@@ -9,6 +9,7 @@ interface props {
   componentId: string;
   title: string;
   icon: string;
+  onPress?: ((event: GestureResponderEvent) => void) | null | undefined;
 }
 
 const MenuSettingItem: React.FC<props> = (props) => {
@@ -33,7 +34,9 @@ const MenuSettingItem: React.FC<props> = (props) => {
   }, [props.componentId, props.id, props.title]);
 
   return (
-    <Pressable onPress={onPress} style={styles.container}>
+    <Pressable
+      onPress={props.onPress ? props.onPress : onPress}
+      style={styles.container}>
       <View style={styles.subContainer}>
         <Icon name={props.icon} size={20} color={'#fff'} />
         <Text style={styles.title}>{props.title}</Text>

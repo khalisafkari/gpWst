@@ -13,6 +13,8 @@ interface props {
     onPress?: ((event: GestureResponderEvent) => void) | null | undefined;
     disable?: boolean;
   };
+  onReport?: ((event: GestureResponderEvent) => void) | null | undefined;
+  onChat?: ((event: GestureResponderEvent) => void) | null | undefined;
 }
 
 const FooterView: React.FC<props> = (props) => {
@@ -24,10 +26,10 @@ const FooterView: React.FC<props> = (props) => {
   return (
     <Animated.View style={[styles.container, {transform: [{translateY}]}]}>
       <View style={styles.childLeft}>
-        <Pressable style={styles.report}>
+        <Pressable onPress={props.onReport} style={styles.report}>
           <Icon name={'exclamationcircleo'} size={20} color={'#fff'} />
         </Pressable>
-        <Pressable style={styles.chat}>
+        <Pressable onPress={props.onChat} style={styles.chat}>
           <Icon name={'message1'} size={20} color={'#fff'} />
         </Pressable>
       </View>

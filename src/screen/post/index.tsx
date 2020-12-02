@@ -2,10 +2,12 @@ import React, {useCallback, useEffect} from 'react';
 import {View, ScrollView} from 'react-native';
 import {sqlite} from '@utils/database';
 import {usePosts} from '@utils/hook';
-import Loading from 'component/loading';
+import Loading from '@component/loading';
 import styles from './styles';
-import ChapterList from 'component/chapterList';
-import DetailContainer from 'component/detailContainer';
+import ChapterList from '@component/chapterList';
+import DetailContainer from '@component/detailContainer';
+import InAppReview from 'react-native-in-app-review';
+import {Navigation} from 'react-native-navigation';
 
 interface props {
   id: string;
@@ -24,6 +26,34 @@ const Post: React.FC<props> = (props) => {
     });
   }, [props.id, props.image, props.title]);
   useEffect(onHistroyAdd, []);
+
+  const onListner = useCallback(() => {
+    const event = Navigation.events().registerComponentDidAppearListener(
+      ({componentName}) => {
+        if (componentName === 'com.bk2020.home') {
+          if (InAppReview.isAvailable()) {
+            InAppReview.RequestInAppReview();
+          }
+        }
+      },
+    );
+    const listener = {
+      componentDidDisappear: function () {
+        if (event !== null) {
+          event.remove();
+        }
+      },
+    };
+    const subscriber = Navigation.events().registerComponentListener(
+      listener,
+      props.componentId,
+    );
+    return () => {
+      subscriber.remove();
+    };
+  }, [props.componentId]);
+
+  useEffect(onListner, []);
 
   return (
     <View style={styles.container}>

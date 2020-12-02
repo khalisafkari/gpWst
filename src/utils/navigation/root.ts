@@ -7,6 +7,7 @@ import {
 import analytics from '@react-native-firebase/analytics';
 import Icon from 'react-native-vector-icons/AntDesign';
 import Purchases from 'react-native-purchases';
+import OneSignal from 'react-native-onesignal';
 // @ts-ignore
 import AppLovinMAX from 'react-native-applovin-max';
 import {useCallback, useEffect} from 'react';
@@ -218,6 +219,10 @@ export default {
       'ioiA26xeiE7sp2y_ooxmzkBikQXzCG2GIIv3T2VKprroz_-gccPp6TZXuZbivFqOP2a3n02TC9W5yDJK3O4QGm',
       () => {},
     );
+  },
+  notif: function () {
+    OneSignal.init('a94f4156-79c6-414d-9b9f-3d5bebeeb8f7');
+    OneSignal.inFocusDisplaying(2);
   },
   getPurchase: function () {},
 };

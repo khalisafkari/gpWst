@@ -1,5 +1,5 @@
 import React, {useCallback, useEffect, useRef, useState} from 'react';
-import {View, Animated, LayoutChangeEvent} from 'react-native';
+import {View, Animated, LayoutChangeEvent, Alert} from 'react-native';
 import {getPostsView} from 'westmanga-extensions';
 import {Navigation} from 'react-native-navigation';
 import {WebView} from 'react-native-webview';
@@ -10,6 +10,7 @@ import HeaderView from '@component/headerView';
 import FooterView from '@component/footerView';
 import {chapterAPI} from '@utils/database';
 import ads from '@utils/ads';
+import {sendEmail} from '@utils/hook';
 
 interface props {
   id: string;
@@ -125,6 +126,22 @@ const Reader: React.FC<props> = (props) => {
     });
   }, []);
 
+  const onReport = useCallback(() => {
+    sendEmail({
+      subject: 'Manga Error | blank',
+      body: 'please fix ' + oldId + ' \n\ndikirim via apps',
+    });
+  }, [oldId]);
+
+  const onChat = useCallback(() => {
+    Alert.alert(
+      'JOMBLO YA',
+      'Layanan chat bukan untuk para jomblo takut nanti terjadi baperan ' +
+        'karena saya developer masih jomblo jadi untuk sementara layanan ini di close dulu hatinya, ' +
+        'dan sampai jumpa nanti',
+    );
+  }, []);
+
   return (
     <View style={styles.container}>
       {state.image.length > 1 ? (
@@ -146,6 +163,8 @@ const Reader: React.FC<props> = (props) => {
         subtitle={oldId}
       />
       <FooterView
+        onChat={onChat}
+        onReport={onReport}
         next={{
           disable: !state.next,
           onPress: () => onNext(state.next),
