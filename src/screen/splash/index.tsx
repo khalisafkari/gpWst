@@ -1,9 +1,7 @@
-import React, {useCallback, useEffect, useRef, useState} from 'react';
+import React, {useCallback, useEffect, useRef} from 'react';
 import {Linking, Pressable, Text, View} from 'react-native';
 import Image from 'react-native-fast-image';
 import root from '@utils/navigation/root';
-import location from 'westmanga-extensions';
-import versions from 'react-native-version-check';
 import styles from './styles';
 
 interface props {
@@ -11,11 +9,6 @@ interface props {
 }
 
 const Splash: React.FC<props> = () => {
-  const [isNeeded, setIsNeeded] = useState<boolean>(false);
-  const [latestVersion, setLatestVersion] = useState<string>(
-    versions.getCurrentVersion(),
-  );
-  const [nanti, setNanti] = useState<boolean>(false);
   const isMounted = useRef<boolean>(true);
 
   useEffect(() => {
@@ -24,47 +17,15 @@ const Splash: React.FC<props> = () => {
     };
   }, []);
 
-  const onFetchCountry = useCallback(() => {
+  useEffect(() => {
     const timeout = setTimeout(() => {
-      location().then(({country}) => {
-        if (country.match(/Indonesia/gi)) {
-          root.tabs();
-        } else {
-          root.pixabay();
-        }
-      });
-    }, 100);
+      root.tabs();
+    }, 1000);
     return () => clearTimeout(timeout);
   }, []);
 
-  const onVersions = useCallback(() => {
-    versions
-      .needUpdate()
-      .then((results) => {
-        if (isMounted.current) {
-          if (results.isNeeded) {
-            setIsNeeded(results.isNeeded);
-            setLatestVersion(results.latestVersion);
-          } else {
-            onFetchCountry();
-          }
-        }
-      })
-      .catch(() => {
-        setNanti(true);
-      });
-  }, [onFetchCountry]);
-
-  useEffect(onVersions, []);
-
   const onFacebok = useCallback(() => {
     Linking.openURL('https://www.facebook.com/tkhalis');
-  }, []);
-
-  const onUpdate = useCallback(() => {
-    versions.getPlayStoreUrl().then((results) => {
-      Linking.openURL(results);
-    });
   }, []);
 
   return (
@@ -72,27 +33,9 @@ const Splash: React.FC<props> = () => {
       <View style={styles.logoContainer}>
         <Image source={require('../../assets/icon.png')} style={styles.image} />
       </View>
-      {isNeeded ? (
-        <Pressable onPress={onUpdate} style={[styles.update]}>
-          <Text style={styles.version}>update now</Text>
-          <Text style={styles.desain}>
-            version {versions.getCurrentVersion()}
-            {' > '}
-            {latestVersion}
-          </Text>
-        </Pressable>
-      ) : null}
-      {nanti ? (
-        <Pressable onPress={onFetchCountry} style={[styles.update]}>
-          <Text style={styles.version}>NANTI</Text>
-        </Pressable>
-      ) : null}
       <Pressable onPress={onFacebok}>
         <Text style={styles.version}>DEV by khalis</Text>
       </Pressable>
-      <Text style={styles.desain}>
-        {`version: ${versions.getCurrentVersion()}(${versions.getCurrentBuildNumber()}) | with Ads`}
-      </Text>
     </View>
   );
 };

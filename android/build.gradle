@@ -31,7 +31,7 @@ allprojects {
             url("$rootDir/../node_modules/react-native-v8/dist")
         }
         maven {
-            url("$rootDir/../node_modules/v8-android/dist")
+            url("$rootDir/../node_modules/v8-android-jit-nointl/dist")
         }
         maven {
             url 'https://maven.monedata.io/artifactory/public'
@@ -40,10 +40,10 @@ allprojects {
                 password 'npg2EgmmbwbNMte8'
             }
         }
-        maven {
-            // Android JSC is installed from npm
-            url("$rootDir/../node_modules/jsc-android/dist")
-        }
+//         maven {
+//             // Android JSC is installed from npm
+//             url("$rootDir/../node_modules/jsc-android/dist")
+//         }
 
         google()
         jcenter()

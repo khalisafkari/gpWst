@@ -4,7 +4,6 @@ import AccountItem from 'component/AccountItem';
 import auth, {FirebaseAuthTypes} from '@react-native-firebase/auth';
 import storage from '@react-native-firebase/storage';
 import {utils} from '@react-native-firebase/app';
-import root from 'utils/navigation/root';
 import Purchases from 'react-native-purchases';
 
 // `/westmanga/${props.user.email}/westmanga.db`,
@@ -87,26 +86,6 @@ const AccountList: React.FC<props> = (props) => {
       .catch(() => {});
   }, []);
 
-  const onGoBuy = useCallback(() => {
-    const timeout = setTimeout(() => {
-      root.push(props.componentId, {
-        name: 'buy',
-        options: {
-          topBar: {
-            visible: false,
-          },
-          bottomTabs: {
-            visible: false,
-          },
-        },
-        passProps: {
-          user: props.user,
-        },
-      });
-    }, 100);
-    return () => clearTimeout(timeout);
-  }, [props.componentId, props.user]);
-
   const onLogout = useCallback(() => {
     return auth().signOut();
   }, []);
@@ -115,13 +94,6 @@ const AccountList: React.FC<props> = (props) => {
     <View>
       <AccountItem onPress={onBackupDB} title={'BACKUP'} icon={'upload'} />
       <AccountItem onPress={onRestoreDB} title={'RESTORE'} icon={'download'} />
-      {isBuy ? (
-        <AccountItem
-          title={'Buy Pro'}
-          icon={'shoppingcart'}
-          onPress={onGoBuy}
-        />
-      ) : null}
       <AccountItem
         onPress={onRestoreBuy}
         title={'Restore Pro'}
